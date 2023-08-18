@@ -5,7 +5,7 @@ import camelot
 from datetime import datetime
 from pathlib import Path
 
-file_path = "data\extrato-test-bb.pdf"
+file_path = "data\extrato-test-bb3.pdf"
 path_destination = ""
 
 # extraindo as tabelas com o camelot
@@ -29,6 +29,8 @@ def extract_columns(df):
             df = df.drop(columns=[1, 3, 5])
         if len(df.columns) == 7: 
             df = df.drop(columns=[1, 2, 4, 6])
+        if len(df.columns) == 8: 
+            df = df.drop(columns=[1, 2, 4, 5, 7])
         
         df = df.iloc[:, [0, 1, 2]]
         df.columns = ["data", "nome", "valor"]
@@ -80,7 +82,7 @@ sum_credit = round(sum_credit, 2)
 sum_debt = round(sum_debt, 2)
 sum = round(sum_credit + sum_debt, 2)
 
-final_list = sort_data(final_list)
+#final_list = sort_data(final_list)
 final_list.append({'total de créditos': sum_credit, 'total de débitos': sum_debt, 'total': sum})
 
 # criando json 
